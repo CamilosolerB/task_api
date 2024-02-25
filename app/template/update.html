@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="{% static 'img/book.png ' %}" type="image/x-icon">
+    <title>Actualizar nota</title>
+</head>
+<body>
+    <div class="flex flex-col h-screen">
+        <div class="border-b flex h-14 items-center px-4"><a
+                class="flex items-center gap-2 text-lg font-semibold dark:text-gray-400" href="#"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="h-4 w-4">
+                    <path d="m15 18-6-6 6-6"></path>
+                </svg>
+                Back
+            </a></div>
+        <form action="/update/" method="post">
+            {% csrf_token %}
+            <div class="flex-1 flex flex-col justify-center gap-4 p-4">
+                <div class="grid gap-1"><label
+                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        for="title">Title</label><input
+                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        id="title" placeholder="Enter the title" name="title" value="{{ note.title }}"></div>
+                <div class="grid gap-1"><label
+                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        for="description">Description</label><textarea
+                        class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 min-h-[100px]"
+                        id="description" placeholder="Enter the description" name="description" >{{ note.description }}</textarea></div>
+                <div class="grid gap-1"><label
+                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        for="date">Date</label><input
+                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        id="date" type="date" value="{{ note.date }}" name="date"></div>
+                <input type="hidden" name="task_id" value="{{ note.taks_id }}">
+            </div>
+            <div class="p-4">
+            <button type="submit"
+                class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full">Update</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
